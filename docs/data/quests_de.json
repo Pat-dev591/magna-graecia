@@ -1,0 +1,5 @@
+[
+  {"id":"q1","startNode":"metapontum","title":"Die zerbrochene Lyra","desc":"Finde die drei Saiten der Lyra, die von Berggeistern gestohlen wurden.","type":"fetch"},
+  {"id":"q2","startNode":"kroton","title":"Panhellenisches Duell","desc":"Nimm teil an einer leichten Wettkampfübung.","type":"mini_game"},
+  {"id":"q3","startNode":"rhegion","title":"Banditen in der Meerenge","desc":"Vertreibe eine Gruppe Banditen (Kampf).","type":"combat"}
+]

@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"id":"taras","name":"Taras","short":"Hafenstadt, Handelszentrum der Kolonisten."},
+    {"id":"kroton","name":"Kroton","short":"Berühmt für Wettkämpfe und philosophische Schulen."},
+    {"id":"sybaris","name":"Sybaris","short":"Wohlhabende Küstenstadt, bekannt für Feste."},
+    {"id":"metapontum","name":"Metapontum","short":"Fruchtbare Ebene mit Heiligtümern und Orakeln."},
+    {"id":"rhegion","name":"Rhegion","short":"Stadt an der Meerenge, Tor nach Sizilien."}
+  ]
+}
