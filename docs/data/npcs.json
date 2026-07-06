@@ -1,0 +1,7 @@
+[
+  {"id":"athene","name":"Athene","node":"kroton","availableFrom":"start","role":"Mentorin"},
+  {"id":"hermes","name":"Hermes","node":"taras","availableFrom":"start","role":"Reiseführer"},
+  {"id":"herakles","name":"Herakles","node":"kroton","availableFrom":"q2","role":"Starker Verbündeter"},
+  {"id":"demeter","name":"Demeter","node":"metapontum","availableFrom":"q1","role":"Mystische Questreihe"},
+  {"id":"poseidon","name":"Poseidon","node":"rhegion","availableFrom":"q3","role":"Meeresmacht"}
+]

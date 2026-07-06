@@ -3,5 +3,11 @@
   "kroton": [ {"text": "Kroton ehrt die Athleten. Vielleicht findest du hier einen Wettkampf."} ],
   "sybaris": [ {"text": "Sybaris — reich an Festen. Achte auf Angebote in den Tavernen."} ],
   "metapontum": [ {"text": "Metapontum: Die Felder und Heiligtümer bieten Rätsel für Wissbegierige."} ],
-  "rhegion": [ {"text": "Rhegion wacht über die Meerenge. Seemänner flüstern von Poseidons Launen."} ]
+  "rhegion": [ {"text": "Rhegion wacht über die Meerenge. Seemänner flüstern von Poseidons Launen."} ],
+
+  "npc_athene": [ {"text": "Ich bin Athene. Weisheit und Strategie leiten jene, die lernen wollen. Hilf den Menschen, und ich werde dir Rat geben."} ],
+  "npc_hermes": [ {"text": "Ich bin Hermes, Bote und Führer. Ich kenne die sicheren Routen übers Meer. Suchst du schnelle Wege oder geheime Pfade?"} ],
+  "npc_herakles": [ {"text": "Ich bin Herakles. Kämpfe ehrenhaften Gegnern, und vielleicht helfe ich dir bei schweren Aufgaben."} ],
+  "npc_demeter": [ {"text": "Ich bin Demeter. Die Fruchtbarkeit der Erde ist zerbrechlich. Hilf mir, und die Ernte wird dir danken."} ],
+  "npc_poseidon": [ {"text": "Ich bin Poseidon. Das Meer hat seine Prüfungen. Mancher Mut wird belohnt, mancher Leichtsinn bestraft."} ]
 }

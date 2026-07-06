@@ -1,4 +1,4 @@
-// src/main.js - Phaser 3 Starter (deutsche Texte)
+// src/main.js - Phaser 3 Starter (deutsche Texte) with NPC support
 class BootScene extends Phaser.Scene {
   constructor() { super('Boot'); }
   preload() {
@@ -44,6 +44,7 @@ class WorldMap extends Phaser.Scene {
     this.load.json('nodes','data/nodes.json');
     this.load.json('quests','data/quests_de.json');
     this.load.json('dialogues','data/dialogues_de.json');
+    this.load.json('npcs','data/npcs.json');
     this.load.start();
     this.load.on('complete', () => {
       // Daten im Cache verfügbar
@@ -77,11 +78,36 @@ class NodeScene extends Phaser.Scene {
     const btnBack = this.add.rectangle(w-80, h-60, 120,40,0xff6b6b).setInteractive({cursor:'pointer'});
     this.add.text(w-140, h-70, 'Zur Karte', { color:'#fff' });
     btnBack.on('pointerdown', () => { this.scene.start('WorldMap'); });
+
+    // NPCs an diesem Ort
+    const npcs = this.cache.json.get('npcs') || [];
+    const localNpcs = npcs.filter(p => p.node === this.nodeId);
+    const state = JSON.parse(localStorage.getItem('mg_state') || '{}');
+    const completedQuests = state.quests || [];
+
+    localNpcs.forEach((npc, idx) => {
+      const y = 120 + idx*40;
+      if (npc.availableFrom === 'start' || completedQuests.includes(npc.availableFrom)) {
+        const btn = this.add.rectangle(w-260, y+10, 200,32,0x4f6ef7).setInteractive({cursor:'pointer'});
+        this.add.text(w-360, y+2, npc.name, { fontSize:'14px', color:'#fff' });
+        btn.on('pointerdown', () => { this.showNpcDialog(npc); });
+      } else {
+        this.add.text(w-360, y+2, npc.name + ' (gesperrt)', { fontSize:'14px', color:'#aaa' });
+        this.add.text(w-260, y+2, 'Frei durch: '+npc.availableFrom, { fontSize:'12px', color:'#ffcc99' });
+      }
+    });
   }
 
   showDialogueForNode(nodeId) {
     const dialogues = this.cache.json.get('dialogues');
     const entries = dialogues[nodeId] || [{text:'Es gibt hier niemanden.'}];
+    const entry = entries[0];
+    this.showDialogueBox(entry.text);
+  }
+
+  showNpcDialog(npc) {
+    const dialogues = this.cache.json.get('dialogues') || {};
+    const entries = dialogues['npc_'+npc.id] || [{text: npc.name + ' sagt nichts.'}];
     const entry = entries[0];
     this.showDialogueBox(entry.text);
   }
@@ -119,7 +145,11 @@ class NodeScene extends Phaser.Scene {
     if (q.type === 'combat') {
       this.scene.start('CombatScene', { questId: qid });
     } else {
-      this.showDialogueBox('Quest gestartet: '+q.title+' (Noch keine komplexe Logik implementiert)');
+      // mark non‑combat quest as accepted and completed immediately for demo
+      const state = JSON.parse(localStorage.getItem('mg_state')||'{}');
+      state.quests = state.quests||[]; if(!state.quests.includes(qid)) state.quests.push(qid);
+      localStorage.setItem('mg_state', JSON.stringify(state));
+      this.showDialogueBox('Quest abgeschlossen (Demo): '+q.title);
     }
   }
 }
@@ -169,6 +199,12 @@ class CombatScene extends Phaser.Scene {
   endCombat(outcome) {
     this.enemyTimer.remove(false);
     if (outcome === 'gewinn') {
+      // markiere Quest als abgeschlossen (falls questId gesetzt)
+      if (this.questId) {
+        const state = JSON.parse(localStorage.getItem('mg_state')||'{}');
+        state.quests = state.quests||[]; if(!state.quests.includes(this.questId)) state.quests.push(this.questId);
+        localStorage.setItem('mg_state', JSON.stringify(state));
+      }
       this.showResult('Sie haben gewonnen!');
     } else if (outcome === 'verloren') {
       this.showResult('Sie haben verloren. Keine Sorge — try again.');
